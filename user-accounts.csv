@@ -1,0 +1,4 @@
+SEQUENTIAL
+TestCaller1;10.254.1.30;[authentication username=testsipuser password=testsippass];4001;10.254.7.31;
+TestCaller2;10.254.1.30;[authentication username=testsipuser password=testsippass];4001;10.254.7.31;
+TestCaller3;10.254.1.30;[authentication username=testsipuser password=testsippass];4001;10.254.7.31;
