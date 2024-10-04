@@ -4,12 +4,8 @@
 <!-- You will need to compile SIPp with OpenSSL support 'make ossl' to use this call scenario -->
 
 <!-- Execute this script with SIPp using the following command assuming your UAS is 10.0.0.10 -->
-<!-- Replace 10.0.0.10 with your SIP proxy’s address. The command will generate 10 calls (-r) per
-10000 -->
-<!-- milliseconds (-rp), max 100 concurrent calls (-l) and make a max of 100000 calls (-m) -->
 
-<!-- ./sipp 10.0.0.10 -sf invite-auth-sdp-nomedia.xml -inf user-accounts.csv -m 100000 -l 100 -r 10
--rp 10000 -->
+<!-- sudo ./sipp 3.132.189.237 -i 172.30.10.200  -trace_err -trace_msg -sf uac_inboundCall.xml -aa -m 1 -l 1 -r 2 -->
 
 <scenario name="call-inbound">
   <send >
@@ -23,8 +19,8 @@
         P-Asserted-Identity: <sip:+17632198167@sip.twilio.com>
         Diversion: <sip:+19284401506@twilio.com>;reason=unconditional
         Call-ID: [call_id]
-        Via: SIP/2.0/UDP 10.160.12.210:5060;branch=z9hG4bK4a9bb19b2641332ad5e5a
-        Contact: <sip:+17632198167@10.160.12.210:5060;transport=udp>
+        Via: SIP/2.0/UDP 172.30.10.200:5060;branch=z9hG4bK4a9bb19b2641332ad5e5a
+        Contact: <sip:+17632198167@172.30.10.200:5060;transport=udp>
         Allow: INVITE,ACK,CANCEL,OPTIONS,BYE,REFER,NOTIFY
         X-Twilio-VerStat: TN-Validation-Passed-B
         X-Twilio-AccountSid: AC6353dd13005b5e55bc27c14010bf506e
@@ -53,9 +49,8 @@
   <recv response="100" optional="true" auth="true">
   </recv>
 
-  <recv response="180" auth="true" >
+  <recv response="200" >
   </recv>
-
 
   <send>
     <![CDATA[
