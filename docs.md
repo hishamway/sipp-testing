@@ -1,3 +1,6 @@
+## Sipp Load testing Kamailio
+    can make inbound outbound and internal load testing 
+
 # Inbound call 
     - Need to trigger from server
     - add server IP in sip proxy address table.

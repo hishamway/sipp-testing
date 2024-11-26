@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 
-<scenario name="register_client_1005">
+<!-- sudo ./sipp sipproxy.us-east-1.uat.bifrost3.csiq.io -i 10.160.12.210  -trace_err -trace_msg -sf registerBulkUAT.xml -aa -inf registerBulk.csv -->
+
+
+<scenario name="register_bulk">
   <send retrans="500">
     <![CDATA[
       REGISTER sip:[field1] SIP/2.0
@@ -11,7 +14,7 @@
       CSeq: 1 REGISTER
       Contact: <sip:[field0]@[local_ip]:[local_port]>
       Max-Forwards: 70
-      Expires: 1800
+      Expires: 120
       User-Agent: SIPp/Linux
       Content-Length: 0
     ]]>
@@ -20,6 +23,7 @@
   <recv response="401" auth="true">
   </recv>
 
+  
   <send retrans="500">
     <![CDATA[
       REGISTER sip:[field1] SIP/2.0
@@ -29,9 +33,10 @@
       Call-ID: [call_id]
       CSeq: 2 REGISTER
       Contact: <sip:[field0]@[local_ip]:[local_port]>
-      [field2]      
+      [field2]
+      Allow: INVITE, INFO, PRACK, ACK, BYE, CANCEL, OPTIONS, NOTIFY, REGISTER, SUBSCRIBE, REFER, PUBLISH, UPDATE, MESSAGE
       Max-Forwards: 70
-      Expires: 1800
+      Expires: 120
       User-Agent: SIPp/Linux
       Content-Length: 0
     ]]>

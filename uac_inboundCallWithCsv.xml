@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE scenario SYSTEM "sipp.dtd">
+
+<!-- You will need to compile SIPp with OpenSSL support 'make ossl' to use this call scenario -->
+
+<!-- Execute this script with SIPp using the following command assuming your UAS is 10.0.0.10 -->
+
+<!-- sudo ./sipp 3.132.189.237 -i 172.30.10.200  -trace_err -trace_msg -sf uac_inboundCall.xml -aa -m 1 -l 1 -r 2 -->
+
+<scenario name="call-inbound">
+  <send >
+    <![CDATA[
+        INVITE sip:[field0]@sipproxy.us-east-1.uat.bifrost3.csiq.io SIP/2.0
+        Record-Route: <sip:54.172.60.1;lr>
+        CSeq: 1 INVITE
+        From: <sip:+17632198167@bifrost-kamailio-uat.pstn.twilio.com>;tag=07763318_c3356d0b_8a19b606-4a72-4a05-bc27-36d20762c192
+        To: <sip:[field0]@sipproxy.us-east-1.uat.bifrost3.csiq.io>
+        Max-Forwards: 63
+        P-Asserted-Identity: <sip:+17632198167@sip.twilio.com>
+        Diversion: <sip:[field0]@twilio.com>;reason=unconditional
+        Call-ID: [call_id]
+        Via: SIP/2.0/UDP 172.30.10.200:5060;branch=z9hG4bK4a9bb19b2641332ad5e5a
+        Contact: <sip:+17632198167@172.30.10.200:5060;transport=udp>
+        Allow: INVITE,ACK,CANCEL,OPTIONS,BYE,REFER,NOTIFY
+        X-Twilio-VerStat: TN-Validation-Passed-B
+        X-Twilio-AccountSid: AC6353dd13005b5e55bc27c14010bf506e
+        User-Agent: Twilio Gateway
+        Content-Type: application/sdp
+        X-Twilio-CallSid: CA23445f2d3b69b8b0c6e4a1b7c2b0115a
+        Content-Length: 279
+
+        v=0
+        o=root 1632449234 1632449234 IN IP4 172.18.174.109
+        s=Twilio Media Gateway
+        c=IN IP4 168.86.137.222
+        t=0 0
+        m=audio 19448 RTP/AVP 0 8 101
+        a=rtpmap:0 PCMU/8000
+        a=rtpmap:8 PCMA/8000
+        a=rtpmap:101 telephone-event/8000
+        a=fmtp:101 0-16
+        a=ptime:20
+        a=maxptime:20
+        a=sendrecv
+
+    ]]>
+  </send>
+
+  <recv response="100" optional="true" auth="true">
+  </recv>
+
+  <recv response="200" >
+  </recv>
+
+
+      <!-- Play a pre-recorded PCAP file (RTP stream)                       -->
+      <nop>
+        <action>
+          <exec play_pcap_audio="pcap/g711a.pcap"/>
+        </action>
+      </nop>
+  
+      <!-- Pause 8 seconds, which is approximately the duration of the      -->
+      <!-- PCAP file                                                        -->
+      <pause milliseconds="8000"/>
+  
+  
+    <pause milliseconds="5000"/>
+  
+  
+      <!-- Play a pre-recorded PCAP file (RTP stream)                       -->
+      <nop>
+        <action>
+          <exec play_pcap_audio="pcap/g711a.pcap"/>
+        </action>
+      </nop>
+  
+      <!-- Pause 8 seconds, which is approximately the duration of the      -->
+      <!-- PCAP file                                                        -->
+      <pause milliseconds="8000"/>
+  
+      <recv request="BYE">
+      </recv>
+  
+  
+  
+  </scenario>
+  

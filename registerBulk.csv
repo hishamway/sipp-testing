@@ -1,0 +1,7 @@
+SEQUENTIAL
+100;uat-metrowest.csiq.io:5060;[authentication username=100 password=test1234]
+101;uat-metrowest.csiq.io:5060;[authentication username=101 password=test1234]
+102;uat-metrowest.csiq.io:5060;[authentication username=102 password=test1234]
+103;uat-metrowest.csiq.io:5060;[authentication username=103 password=test1234]
+104;uat-metrowest.csiq.io:5060;[authentication username=104 password=test1234]
+105;uat-metrowest.csiq.io:5060;[authentication username=105 password=test1234]
